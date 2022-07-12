@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import EmployeeService from "../Services/EmployeeService";
 
-class CreateNewEmployee extends Component {
+class UpdateEmployeeComponent extends Component {
   constructor(props) {
-    super(props);
+      super(props);
+    //   console.log(this.props.match.params.id);
 
-    this.state = {
+      this.state = {
+        id:this.props.match.params.id,
       firstName: "",
       lastName: "",
       mailId: "",
@@ -13,18 +15,31 @@ class CreateNewEmployee extends Component {
     this.changeFirstName = this.changeFirstName.bind(this);
     this.changeLastName = this.changeLastName.bind(this);
     this.changeMailId = this.changeMailId.bind(this);
-    this.saveEmployee = this.saveEmployee.bind(this);
-  }
-  saveEmployee = (event) => {
+    this.updateEmployee = this.updateEmployee.bind(this);
+    }
+    componentDidMount() {
+        EmployeeService.getEmployeeById(this.state.id).then((res) => {
+            let employee = res.data
+            this.setState({
+                firstName: employee.firstName,
+                lastName: employee.lastName,
+                mailId:employee.mailId
+            })
+        })
+    }
+  updateEmployee = (event) => {
     event.preventDefault();
     let employee = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
       mailId: this.state.mailId,
     };
-    EmployeeService.createEmployee(employee).then((res) => {
-      this.props.history.push("/employees");
-    });
+
+      console.log(JSON.stringify(employee))
+    
+      EmployeeService.updateEmployee(employee, this.state.id).then((res) => {
+          this.props.history.push("/employees")
+      })
   };
   changeFirstName = (event) => {
     this.setState({ firstName: event.target.value });
@@ -44,7 +59,7 @@ class CreateNewEmployee extends Component {
         <div className="container">
           <div className="row">
             <div className="card col-md-6 offset-md-3">
-              <h3 className="text-center">Add Employee</h3>
+              <h3 className="text-center">Update Employee</h3>
               <div className="card-body">
                 <form>
                   {/* First Name */}
@@ -84,9 +99,9 @@ class CreateNewEmployee extends Component {
                   {/* Buttons */}
                   <button
                     className="btn btn-success"
-                    onClick={this.saveEmployee}
+                    onClick={this.updateEmployee}
                   >
-                    Save
+                    Update
                   </button>
                   <button
                     className="btn btn-danger"
@@ -104,5 +119,4 @@ class CreateNewEmployee extends Component {
     );
   }
 }
-
-export default CreateNewEmployee;
+export default UpdateEmployeeComponent;

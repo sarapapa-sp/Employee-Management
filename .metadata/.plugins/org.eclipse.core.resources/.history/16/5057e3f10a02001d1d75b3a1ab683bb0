@@ -51,7 +51,7 @@ public class EmployeeController {
 		Employee employee=employeeRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFound("Not Found" + id));
 		
-		employee.setFirstName(employeedetails.getFirstName());
+		employee.setFirstName(employeedetails.getLastName());
 		employee.setLastName(employeedetails.getLastName());
 		employee.setMailId(employeedetails.getMailId());
 		
