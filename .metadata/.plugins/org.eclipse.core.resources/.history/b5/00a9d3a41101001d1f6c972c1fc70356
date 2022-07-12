@@ -1,0 +1,5 @@
+spring.datasource.url=jdbc:mysql://localhost:3306/emp_management?autoReconnect=true&useSSL=false&publicKeyRetrieval=true
+sping.datasource.username=root
+spring.datasource.password=Sage
+
+
