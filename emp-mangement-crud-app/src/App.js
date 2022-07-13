@@ -1,11 +1,11 @@
-
-import './App.css';
-import FooterComponent from './Components/FooterComponent';
-import HeaderComponent from './Components/HeaderComponent';
-import ListOfEmployees from './Components/ListOfEmployees';
-import {BrowserRouter as Router , Route , Switch} from "react-router-dom"
-import CreateNewEmployee from './Components/CreateNewEmployee';
-import UpdateEmployeeComponent from './Components/UpdateEmployeeComponent';
+import "./App.css";
+import FooterComponent from "./Components/FooterComponent";
+import HeaderComponent from "./Components/HeaderComponent";
+import ListOfEmployees from "./Components/ListOfEmployees";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import CreateNewEmployee from "./Components/CreateNewEmployee";
+import UpdateEmployeeComponent from "./Components/UpdateEmployeeComponent";
+import ViewEmployeeComponent from "./Components/ViewEmployeeComponent";
 
 function App() {
   return (
@@ -17,7 +17,14 @@ function App() {
             <Route path="/" exact component={ListOfEmployees}></Route>
             <Route path="/employees" component={ListOfEmployees}></Route>
             <Route path="/addEmployee" component={CreateNewEmployee}></Route>
-            <Route path="/updateEmployee/:id" component={UpdateEmployeeComponent}></Route>
+            <Route
+              path="/updateEmployee/:id"
+              component={UpdateEmployeeComponent}
+            ></Route>
+            <Route
+              path="/viewEmployee/:id"
+              component={ViewEmployeeComponent}
+            ></Route>
           </Switch>
         </div>
         <FooterComponent />
